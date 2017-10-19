@@ -17,7 +17,7 @@ def main():
                 word = word.replace("_", "")
                 if a_low == '':
                     return 1
-                definition = mem_name + "[32'h" +a_high+a_low+"] = 32'h" + word + '\n'
+                definition = mem_name + "[32'h" +a_high+a_low+"] = 32'h" + word + ';\n'
                 out_file.write(definition)
                 a_low = format(int(a_low,16) + 1, '04X')
     in_file.close()
