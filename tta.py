@@ -7,9 +7,20 @@ def main():
     mem_name = str(sys.argv[3])
     in_file = open(str(sys.argv[1]))
     out_file = open(str(sys.argv[2]), 'a')
+    
+    m_cm = False    //multi-line comment flag
     for line in in_file:
             words = line.split()
-            if words[0][0] == '/' or words[0][0] == '' or words[0][0] == '\n':
+            if m_cm == True and '*/' in words:
+                m_cm = False
+            elif m_cm == True:
+                continue
+            elif '//' in words or words[0][0] == '' or words[0][0] == '\n':
+                continue
+            elif '/*' in words:
+                m_cm = True
+                if '*/' in words:
+                    m_cm = False
                 continue
             a_high = words[0][1:5]
             a_low = words[0][5:9]
