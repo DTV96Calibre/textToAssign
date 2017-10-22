@@ -39,7 +39,7 @@ def main():
     mem_name = str(sys.argv[3])
     in_file = open(str(sys.argv[1]))
     out_file = open(str(sys.argv[2]), 'a')
-    
+
     total_file = in_file.read()
     in_file.close()
 
@@ -49,7 +49,8 @@ def main():
     for line in no_comment_file:
         #print("line:{0}".format(line.strip()))
         words = line.split()
-        
+        if len(words) < 1:
+            continue
         if words[0][0] == '/' or words[0][0] == '' or words[0][0] == '\n':
             continue
         a_high = words[0][1:5]
@@ -62,7 +63,7 @@ def main():
                 "[32'h" + a_high + a_low + "] = 32'h" + word + ';\n'
             out_file.write(definition)
             a_low = format(int(a_low, 16) + 1, '04X')
-        
+
     out_file.close()
     print("Complete")
 
