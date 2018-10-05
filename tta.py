@@ -37,7 +37,13 @@ def main():
         print("Incorrect argument structure")
         return 1
     mem_name = str(sys.argv[3])
-    in_file = open(str(sys.argv[1]))
+    try:
+        #validations if file exist
+        in_file = open(str(sys.argv[1]))
+        return 1
+    except IOError:
+        print "Error: File does not appear to exist."
+        return 0
     out_file = open(str(sys.argv[2]), 'a')
 
     total_file = in_file.read()
