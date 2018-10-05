@@ -8,6 +8,15 @@ except ImportError:
 
 # https://stackoverflow.com/questions/241327/python-snippet-to-remove-c-and-c-comments
 
+def check_if_address_is_first_line(file):  
+    file.seek(0)
+    pattern = re.compile(r"^((.*)\s)*(?:[\w]\:|\\)?(\\?[a-z_\-\s0-9\.]+)+\.(srec)(\s(.*))*$")
+    if not my_file.read(1):
+        my_file.seek(0)
+        first_line = file.readline()
+        if pattern.match(first_line):
+            return 1
+    return 0
 
 def removeCCppComment(text):
 
@@ -39,6 +48,11 @@ def main():
     mem_name = str(sys.argv[3])
     in_file = open(str(sys.argv[1]))
     out_file = open(str(sys.argv[2]), 'a')
+
+    if check_if_address_is_first_line(in_file):
+        print 'no address in first line file'
+        sys.exit([arg])
+
 
     total_file = in_file.read()
     in_file.close()
